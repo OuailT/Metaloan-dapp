@@ -11,7 +11,7 @@ import SubmitLoan from "./components/UserPages/SubmitLoan/SubmitLoan";
 import PayLoan from "./components/UserPages/PayLoan/PayLoan";
 import FetchLoan from "./components/UserPages/FetchLoan/FetchLoan";
 import FetchBorrowers from "./components/UserPages/FetchBorrowers/FetchBorrowers";
-import { Routes, Route} from "react-router-dom";
+// import { Routes, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import HeroSection from "./components/HeroSection/HeroSection";
 import About from "./components/About/About";
@@ -277,49 +277,35 @@ function App() {
   return (
     <s.Main>
         <>  
-            <Navbar/>
-            <Routes>
-                <Route path="/" element={<HeroSection/>}/>
-                <Route path="/howItWorks" element={<HowItoWorks/>}/>
-                <Route path="/about" element={<About/>}/>
-                <Route path="/ourteam" element={<OurTeam/>}/>
-                {/* <Route path="/faq" element={<FAQ/>}/> */}
-                <Route path="/launchApp"
-                    element={<LaunchApp fetchLoanData={fetchLoanData} 
-                                        fetchBorrowersData={fetchBorrowersData}/>}>
+                    <Navbar/>
+                    <HeroSection/>
+                    <About/>
+                    <HowItoWorks/>
+                    <OurTeam/>
+                    <FAQ/>
+                    {/* <LaunchApp fetchLoanData={fetchLoanData} 
+                                        fetchBorrowersData={fetchBorrowersData}/> */}
                 
-                    <Route path="submitLoan" 
-                    element={<SubmitLoan getLoan={getLoan}
+                    {/* <SubmitLoan getLoan={getLoan}
                                          incrementLoanId={incrementLoanId}
                                          decrementLoanId={decrementLoanId}
                                          loanId={loanId}
                                          alert = {alert}
                                          removeAlert = {showAlert}
                                          activePayment={activePayment}
-                                         />}/>
-
-                    <Route path="payLoan"
-                    element={<PayLoan    payLoan={payLoan}
+                                         /> */}
+                    {/* <PayLoan payLoan={payLoan}
                                          alert = {alert}
                                          removeAlert = {showAlert}
                                          incrementLoanId={incrementLoanId}
                                          decrementLoanId={decrementLoanId}
                                          loanId={loanId}
-                                         activePayment={activePayment}/>}/>
-
-                    <Route path="fetchLoan" 
-                    element={<FetchLoan LoanData={LoanData}
-                                        isBorrowerAddress={isBorrowerAddress}/>}/>
-
-                    <Route path="fetchBorrowers" 
-                    element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
-                    {/* <Route path="createPlan"
-                    element={<CreatePlan createPlan={createPlan}/>}/> */}
-                </Route>
-            </Routes>
-            <ContactForm removeAlert={showAlert}
-                         alert={alert}/>
-            <Footer/>
+                                         activePayment={activePayment}/> */}
+                    {/* <FetchLoan LoanData={LoanData} isBorrowerAddress={isBorrowerAddress}/> */}
+                    {/* <FetchBorrowers BorrowersData = {BorrowersData}/> */}
+                    {/* <CreatePlan createPlan={createPlan}/> */}
+                    <ContactForm removeAlert={showAlert} alert={alert}/>
+                    <Footer/>
         </>
     </s.Main>
     
@@ -327,6 +313,60 @@ function App() {
 }
 
 export default App;
+
+
+
+
+// return (
+//   <s.Main>
+//       <>  
+//           <Navbar/>
+//           <Routes>
+//               <Route path="/" element={<HeroSection/>}/>
+//               <Route path="/howItWorks" element={<HowItoWorks/>}/>
+//               <Route path="/about" element={<About/>}/>
+//               <Route path="/metateam" element={<OurTeam/>}/>
+//               {/* <Route path="/faq" element={<FAQ/>}/> */}
+//               <Route path="/launchApp"
+//                   element={<LaunchApp fetchLoanData={fetchLoanData} 
+//                                       fetchBorrowersData={fetchBorrowersData}/>}>
+              
+//                   <Route path="submitLoan" 
+//                   element={<SubmitLoan getLoan={getLoan}
+//                                        incrementLoanId={incrementLoanId}
+//                                        decrementLoanId={decrementLoanId}
+//                                        loanId={loanId}
+//                                        alert = {alert}
+//                                        removeAlert = {showAlert}
+//                                        activePayment={activePayment}
+//                                        />}/>
+
+//                   <Route path="payLoan"
+//                   element={<PayLoan    payLoan={payLoan}
+//                                        alert = {alert}
+//                                        removeAlert = {showAlert}
+//                                        incrementLoanId={incrementLoanId}
+//                                        decrementLoanId={decrementLoanId}
+//                                        loanId={loanId}
+//                                        activePayment={activePayment}/>}/>
+
+//                   <Route path="fetchLoan" 
+//                   element={<FetchLoan LoanData={LoanData}
+//                                       isBorrowerAddress={isBorrowerAddress}/>}/>
+
+//                   <Route path="fetchBorrowers" 
+//                   element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
+//                   {/* <Route path="createPlan"
+//                   element={<CreatePlan createPlan={createPlan}/>}/> */}
+//               </Route>
+//           </Routes>
+//           <ContactForm removeAlert={showAlert}
+//                        alert={alert}/>
+//           <Footer/>
+//       </>
+//   </s.Main>
+  
+// );
 
 
 

@@ -4,8 +4,6 @@ import emailsjs from "@emailjs/browser";
 import Alert from '../Alert/Alert';
 
 
-
-
 const ContactForm = ({alert, removeAlert}) => {
   const form = useRef();
   const [disabled, setDisabled] = useState(false);
@@ -28,7 +26,7 @@ const ContactForm = ({alert, removeAlert}) => {
   } 
 
     return (
-        <section className="contacts" id="booking">
+        <section className="contacts" id="requestloan">
         <div className="title">
           <h1>Request a Loan</h1>
           <p>Complete this form to receive your custom loan plan</p>

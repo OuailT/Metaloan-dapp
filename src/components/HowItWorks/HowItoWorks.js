@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HowItoWorks = () => {
     const navigate = useNavigate();
     return (
-        <div className="howItWorks-content">
+        <div className="howItWorks-content" id="howItworks">
             <div className="imgBox">
                 <img src={metaHeroImg} alt="aboutImg" className='metaHero'/>
             </div>

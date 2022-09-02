@@ -9,7 +9,7 @@ import ouailBlock from "../../assets/OuailProfilPro.jpg";
 const OurTeam = () => {
 
     return (
-        <div className="OurTeam-section">
+        <div className="OurTeam-section" id="metateam">
             <h1 className="teamTitle">Our Team</h1>
             <div className="container"> 
                 <div class="card">
