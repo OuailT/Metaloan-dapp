@@ -8,10 +8,10 @@
 }
 
 .Footer .container {
-  max-width: 1158px;
+  max-width: 1435px;
   height: 100%;
   width: auto;
-  padding: 33px 24px 33px;
+  padding: 33px 0px 33px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -20,7 +20,7 @@
 
 .Footer .container .row {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-around;
   flex-direction: column;
   align-items: revert;
 }
@@ -46,7 +46,7 @@
 }
 
 .Footer .container .navigation li a {
-  font-size: 2rem;
+  font-size: 1.40rem;
 }
 
 

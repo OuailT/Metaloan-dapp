@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'; 
-import { Link } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import { connect } from "../../redux/blockchain/blockchainActions";
 import { useDispatch, useSelector} from "react-redux";
 import {fetchData} from "../../redux/data/dataActions";
@@ -68,28 +68,28 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                    <Link to="about" spy={true} smooth={true} offset={-222} duration={500} onClick={closeMobileMenu}>About Us</Link>     
+                    <Link to="/howitWorks" onClick={closeMobileMenu}>How it Works</Link>
                 </li>
 
                 <li>
-                    <Link to="howItworks" spy={true} smooth={true} offset={-10} duration={500} onClick={closeMobileMenu}>How it Works</Link>
+                    <Link to="/about" onClick={closeMobileMenu}>About Us</Link>   
                 </li>
 
                 <li>
-                    <Link to="metateam" spy={true} smooth={true} offset={-75} duration={500} onClick={closeMobileMenu}>Our Team</Link>
-                </li>
-
-                <li>
-                    <Link to="faq" spy={true} smooth={true} offset={-30} duration={500} onClick={closeMobileMenu}>FAQ</Link>
-                </li>
-
-                <li>
-                    <Link to="requestloan" spy={true} smooth={true} offset={50} duration={500} onClick={closeMobileMenu}>Request a Loan</Link>
+                    <Link to="/metateam" onClick={closeMobileMenu}>Our Team</Link>
                 </li>
 
                 {/* <li>
-                    <Link to="/launchApp/submitLoan" id="connect" onClick={closeMobileMenu}>My Loan</Link>     
+                    <Link to="/faq" onClick={closeMobileMenu}>FAQ</Link>
                 </li> */}
+
+                <li>
+                    <Link to="/requestloan" onClick={closeMobileMenu}>Request a Loan</Link>
+                </li>
+
+                <li>
+                    <Link to="/launchApp/submitLoan" id="connect" onClick={closeMobileMenu}>My Loan</Link>     
+                </li>
 
                 <li>
                     <button className='btn'

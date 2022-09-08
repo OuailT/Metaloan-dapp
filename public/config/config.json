@@ -1,6 +1,6 @@
 {
-    "CONTRACT_ADDRESS": "0x6Eb3a9B8776BE1DdbAc473D2af5b403BA69320cb",
-    "SCAN_LINK": "https://polygonscan.com/address/0x6eb3a9b8776be1ddbac473d2af5b403ba69320cb",
+    "CONTRACT_ADDRESS": "0xA3b2C7cE6f2788148EBfc65BeB4Cb04cb3BDe46E",
+    "SCAN_LINK": "https://polygonscan.com/address/0xA3b2C7cE6f2788148EBfc65BeB4Cb04cb3BDe46E",
     "NETWORK": {
       "NAME": "Polygon Mainnet",
       "SYMBOL": "MATIC",
@@ -15,4 +15,7 @@
     "MARKETPLACE_LINK": "https://testnets.opensea.io/",
     "SHOW_BACKGROUND": true
   }
+  
+
+  
   

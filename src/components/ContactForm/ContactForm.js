@@ -57,7 +57,7 @@ const ContactForm = ({alert, removeAlert}) => {
                     " The user acknowledge that MetaLoan requires payment of 30% down payment before any purchase " : 
                     "The user didn't acknowledge that MetaLoan requires payment of 30% down payment before any purchase"}
                   onChange={()=> setIsCheckBox(!isCheckBox)}/>  
-            <label for="user_checkbox">MetaLoan requires payment of a 30% down payment before any purchase. By submitting a request you acknowledge this requirement.</label>
+            <label for="user_checkbox">MetaLoan requires a down payment of up to 50% before any purchase. By submitting a request you acknowledge this requirement.</label>
           </div>
 
           <div className="inputBox">

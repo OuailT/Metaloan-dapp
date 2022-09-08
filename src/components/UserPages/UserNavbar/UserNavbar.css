@@ -50,7 +50,7 @@ a#lastChild {
     .links-Navigation li a {
         letter-spacing: 0.3px;
         font-weight: 400;
-        color: #000;
+        color: #fff;
         font-size: 1rem;
         transition: color 0.5s;
     }

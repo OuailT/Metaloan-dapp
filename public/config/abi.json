@@ -560,32 +560,6 @@
 
                   ],
 
-                  "name": "deleteLoan",
-
-                  "outputs": [],
-
-                  "stateMutability": "nonpayable",
-
-                  "type": "function"
-
-  },
-
-  {
-
-                  "inputs": [
-
-                                  {
-
-                                                  "internalType": "uint256",
-
-                                                  "name": "_planId",
-
-                                                  "type": "uint256"
-
-                                  }
-
-                  ],
-
                   "name": "deletePlan",
 
                   "outputs": [],
@@ -676,7 +650,7 @@
 
                                                   ],
 
-                                                  "internalType": "struct MetaLoanPayment.SubmittedLoan[]",
+                                                  "internalType": "struct MetaLoan.SubmittedLoan[]",
 
                                                   "name": "",
 
@@ -768,7 +742,7 @@
 
                                                   ],
 
-                                                  "internalType": "struct MetaLoanPayment.SubmittedLoan",
+                                                  "internalType": "struct MetaLoan.SubmittedLoan",
 
                                                   "name": "",
 
@@ -850,7 +824,7 @@
 
                                                   ],
 
-                                                  "internalType": "struct MetaLoanPayment.Plan",
+                                                  "internalType": "struct MetaLoan.Plan",
 
                                                   "name": "",
 
@@ -920,7 +894,7 @@
 
                                                   ],
 
-                                                  "internalType": "struct MetaLoanPayment.Plan[]",
+                                                  "internalType": "struct MetaLoan.Plan[]",
 
                                                   "name": "",
 
@@ -1321,32 +1295,6 @@
                   ],
 
                   "stateMutability": "view",
-
-                  "type": "function"
-
-  },
-
-  {
-
-                  "inputs": [
-
-                                  {
-
-                                                  "internalType": "uint256",
-
-                                                  "name": "_amount",
-
-                                                  "type": "uint256"
-
-                                  }
-
-                  ],
-
-                  "name": "withdrawEth",
-
-                  "outputs": [],
-
-                  "stateMutability": "payable",
 
                   "type": "function"
 

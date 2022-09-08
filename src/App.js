@@ -11,7 +11,7 @@ import SubmitLoan from "./components/UserPages/SubmitLoan/SubmitLoan";
 import PayLoan from "./components/UserPages/PayLoan/PayLoan";
 import FetchLoan from "./components/UserPages/FetchLoan/FetchLoan";
 import FetchBorrowers from "./components/UserPages/FetchBorrowers/FetchBorrowers";
-// import { Routes, Route} from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import HeroSection from "./components/HeroSection/HeroSection";
 import About from "./components/About/About";
@@ -113,7 +113,7 @@ function App() {
   // }
 
 
-  // To request a Loan at a specific planId
+  // Function to request a loan for a specific loan plan
   async function getLoan() {
     showAlert(true, "Welcome to MetaLoan, Your payment is processing...!");
     setActivePayment(true);
@@ -123,13 +123,18 @@ function App() {
     let tokenPayment = plan.tokenPayment;
     let upfrontPayment = plan.upfrontPayment;
 
-    /* Create Instance of USDC tokens */ 
-    let USDTToken = new web3.eth.Contract(ERC20ABI, tokenPayment);
+    /* Create Instance of USDC || USDT smart contracts to approve metaloan contracts.*/ 
+    let stableTokenContract = new web3.eth.Contract(ERC20ABI, tokenPayment);
 
-    const MetaLoanAddress = "0x6Eb3a9B8776BE1DdbAc473D2af5b403BA69320cb";
+    const MetaLoanAddress = "0xA3b2C7cE6f2788148EBfc65BeB4Cb04cb3BDe46E";
 
-    /* We can't use to: because we are approving not transferring funds */
-    USDTToken.methods
+    /** 
+      * We can't use to param: because we are approving not transferring funds.
+      * NOTE: In order to transfer funds from a user wallet to another wallet throught a third party contract(Metaloan contract)
+        the USER MUST APPROVE the third party contract to spend his tokens and his behalf.
+      * The approve function should come firt and should be implemented in the daap not in the smart contract.
+     */
+    stableTokenContract.methods
     .approve(MetaLoanAddress, upfrontPayment)
     .send({from : blockchain.account,
            maxPriorityFeePerGas: null,
@@ -164,7 +169,7 @@ function App() {
   }
 
 
-  /* To Pay for monthly Loan */
+  /* Function to make a monthly payment */
   async function payLoan() {
     setActivePayment(true);
     showAlert(true, "Happy to see you, Your payment is processing...!");  
@@ -176,11 +181,11 @@ function App() {
     let monthlyPayment = plan.monthlyPayment;
     
     /* Create Instance of USDC tokens */ 
-    let USDTToken = new web3.eth.Contract(ERC20ABI, tokenPayment);
-
-    const MetaLoanAddress = "0x6Eb3a9B8776BE1DdbAc473D2af5b403BA69320cb";
+    let stableTokenContract = new web3.eth.Contract(ERC20ABI, tokenPayment);
     
-    USDTToken.methods
+    const MetaLoanAddress = "0xA3b2C7cE6f2788148EBfc65BeB4Cb04cb3BDe46E";
+
+    stableTokenContract.methods
     .approve(MetaLoanAddress, monthlyPayment)
     .send({from : blockchain.account,
            maxPriorityFeePerGas: null,
@@ -213,7 +218,6 @@ function App() {
 
   
   
-
   /* Fetch loan per user */
   async function fetchLoanData() {
     /* User Account */
@@ -275,41 +279,61 @@ function App() {
 
 
   return (
-    <s.Main>
-        <>  
-                    <Navbar/>
-                    <HeroSection/>
-                    <About/>
-                    <HowItoWorks/>
-                    <OurTeam/>
-                    <FAQ/>
-                    {/* <LaunchApp fetchLoanData={fetchLoanData} 
-                                        fetchBorrowersData={fetchBorrowersData}/> */}
-                
-                    {/* <SubmitLoan getLoan={getLoan}
-                                         incrementLoanId={incrementLoanId}
-                                         decrementLoanId={decrementLoanId}
-                                         loanId={loanId}
-                                         alert = {alert}
-                                         removeAlert = {showAlert}
-                                         activePayment={activePayment}
-                                         /> */}
-                    {/* <PayLoan payLoan={payLoan}
-                                         alert = {alert}
-                                         removeAlert = {showAlert}
-                                         incrementLoanId={incrementLoanId}
-                                         decrementLoanId={decrementLoanId}
-                                         loanId={loanId}
-                                         activePayment={activePayment}/> */}
-                    {/* <FetchLoan LoanData={LoanData} isBorrowerAddress={isBorrowerAddress}/> */}
-                    {/* <FetchBorrowers BorrowersData = {BorrowersData}/> */}
-                    {/* <CreatePlan createPlan={createPlan}/> */}
-                    <ContactForm removeAlert={showAlert} alert={alert}/>
-                    <Footer/>
-        </>
-    </s.Main>
+  <s.Main>
+      <>  
+          <Navbar/>
+          <Routes>
+              <Route exact path="/" element={<HeroSection/>}/>
+              <Route exact path="/howitWorks" element={<HowItoWorks/>}/>
+              <Route exact path="/about" element={<About/>}/>
+              <Route exact path="/metateam" element={<OurTeam/>}/>
+              <Route exact path="/requestloan" element={<ContactForm removeAlert={showAlert}
+                       alert={alert}/>}/>
+              
+              {/* <Route path="/faq" element={<FAQ/>}/> */}
+              <Route exact path="/launchApp"
+                  element={<LaunchApp fetchLoanData={fetchLoanData} 
+                                      fetchBorrowersData={fetchBorrowersData}/>}>
+              
+              <Route exact path="submitLoan"
+                  element={<SubmitLoan getLoan={getLoan}
+                                       incrementLoanId={incrementLoanId}
+                                       decrementLoanId={decrementLoanId}
+                                       loanId={loanId}
+                                       alert = {alert}
+                                       removeAlert = {showAlert}
+                                       activePayment={activePayment}
+                                       />}/>
+
+                <Route exact path="payLoan"
+                  element={<PayLoan payLoan={payLoan}
+                                       alert = {alert}
+                                       removeAlert = {showAlert}
+                                       incrementLoanId={incrementLoanId}
+                                       decrementLoanId={decrementLoanId}
+                                       loanId={loanId}
+                                       activePayment={activePayment}/>}/>
+
+                  <Route exact path="fetchLoan" 
+                  element={<FetchLoan LoanData={LoanData}
+                                      isBorrowerAddress={isBorrowerAddress}/>}/>
+
+                  <Route exact path="fetchBorrowers" 
+                  element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
+
+                  {/* <Route path="createPlan"
+                  element={<CreatePlan createPlan={createPlan}/>}/> */}
+                  
+              </Route>
+          </Routes>
+          {/* <ContactForm exact removeAlert={showAlert}
+                       alert={alert}/> */}
+          <Footer/>
+      </>
+  </s.Main>
+  
+);
     
-  );
 }
 
 export default App;
@@ -317,56 +341,54 @@ export default App;
 
 
 
+
+
 // return (
 //   <s.Main>
 //       <>  
-//           <Navbar/>
-//           <Routes>
-//               <Route path="/" element={<HeroSection/>}/>
-//               <Route path="/howItWorks" element={<HowItoWorks/>}/>
-//               <Route path="/about" element={<About/>}/>
-//               <Route path="/metateam" element={<OurTeam/>}/>
-//               {/* <Route path="/faq" element={<FAQ/>}/> */}
-//               <Route path="/launchApp"
-//                   element={<LaunchApp fetchLoanData={fetchLoanData} 
-//                                       fetchBorrowersData={fetchBorrowersData}/>}>
+//                   <Navbar/>
+//                   <HeroSection/>
+//                   <About/>
+//                   <HowItoWorks/>
+//                   <OurTeam/>
+//                   <FAQ/>
+//                   {/* <LaunchApp fetchLoanData={fetchLoanData} 
+//                                       fetchBorrowersData={fetchBorrowersData}/> */}
               
-//                   <Route path="submitLoan" 
-//                   element={<SubmitLoan getLoan={getLoan}
+//                   {/* <SubmitLoan getLoan={getLoan}
 //                                        incrementLoanId={incrementLoanId}
 //                                        decrementLoanId={decrementLoanId}
 //                                        loanId={loanId}
 //                                        alert = {alert}
 //                                        removeAlert = {showAlert}
 //                                        activePayment={activePayment}
-//                                        />}/>
-
-//                   <Route path="payLoan"
-//                   element={<PayLoan    payLoan={payLoan}
+//                                        /> */}
+//                   {/* <PayLoan payLoan={payLoan}
 //                                        alert = {alert}
 //                                        removeAlert = {showAlert}
 //                                        incrementLoanId={incrementLoanId}
 //                                        decrementLoanId={decrementLoanId}
 //                                        loanId={loanId}
-//                                        activePayment={activePayment}/>}/>
-
-//                   <Route path="fetchLoan" 
-//                   element={<FetchLoan LoanData={LoanData}
-//                                       isBorrowerAddress={isBorrowerAddress}/>}/>
-
-//                   <Route path="fetchBorrowers" 
-//                   element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
-//                   {/* <Route path="createPlan"
-//                   element={<CreatePlan createPlan={createPlan}/>}/> */}
-//               </Route>
-//           </Routes>
-//           <ContactForm removeAlert={showAlert}
-//                        alert={alert}/>
-//           <Footer/>
+//                                        activePayment={activePayment}/> */}
+//                   {/* <FetchLoan LoanData={LoanData} isBorrowerAddress={isBorrowerAddress}/> */}
+//                   {/* <FetchBorrowers BorrowersData = {BorrowersData}/> */}
+//                   {/* <CreatePlan createPlan={createPlan}/> */}
+//                   <ContactForm removeAlert={showAlert} alert={alert}/>
+//                   <Footer/>
 //       </>
 //   </s.Main>
   
 // );
+
+
+
+
+
+
+
+
+
+
 
 
 
