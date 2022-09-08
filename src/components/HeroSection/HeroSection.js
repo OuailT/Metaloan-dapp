@@ -18,7 +18,7 @@ const HeroSection = () => {
                         <button 
                               className='btn' 
                               id='btn-left'
-                              onClick={()=> navigate("/ContactForm")}>Request A Loan</button>
+                              onClick={()=> navigate("/requestloan")}>Request A Loan</button>
                         {/* <button className='btn'>WhitePaper</button> */}
                     </div>
                 </div>
