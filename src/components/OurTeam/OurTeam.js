@@ -2,8 +2,8 @@ import "./OurTeam.css";
 import { BsTwitter} from 'react-icons/bs';
 import {ImLinkedin2} from "react-icons/im";
 import devProfil from "../../assets/devProfil.png";
-import metaProfil from "../../assets/Eduardo Avatar.jpg";
-import eduardoMeta from "../../assets/Eduardo.png";
+import metaProfil from "../../assets/eduardoAvatar.jpg";
+import eduardoMeta from "../../assets/eduardoProfil.png";
 import ouailBlock from "../../assets/OuailProfilPro.jpg";
 
 const OurTeam = () => {

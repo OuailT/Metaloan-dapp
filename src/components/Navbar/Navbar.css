@@ -6,7 +6,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px 50px;
+    padding: 40px 50px;
     z-index: 10000;
     transition: 0.5s; 
 }
