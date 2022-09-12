@@ -13,7 +13,7 @@ const Navbar = () => {
     const [accounts, setAccounts] = useState([]);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
+    console.log(blockchain.account, accounts);
 
     // useEffect(()=> {
     //     
@@ -84,11 +84,17 @@ const Navbar = () => {
                 </li> */}
 
                 <li>
-                    <Link to="/requestloan" onClick={closeMobileMenu}>Request a Loan</Link>
+                    <Link to="/requestloan" id="lastchild" onClick={closeMobileMenu}>Request a Loan</Link>
                 </li>
 
                 <li>
                     <Link to="/launchApp/submitLoan" id="connect" onClick={closeMobileMenu}>My Loan</Link>     
+                </li>
+
+                <li>
+                    {blockchain.account == 0xb8CeA4b30758f65657287e3bdc2eAC6bf9e68702
+                        &&
+                    <Link to="/admin" id="connect" onClick={closeMobileMenu}>Admin</Link> }
                 </li>
 
                 <li>

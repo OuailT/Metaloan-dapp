@@ -17,10 +17,12 @@ import HeroSection from "./components/HeroSection/HeroSection";
 import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 import ContactForm from "./components/ContactForm/ContactForm";
+import Admin from "./components/Admin/Admin";
 import HowItoWorks from "./components/HowItWorks/HowItoWorks";
 import ERC20ABI from "./ERC20ABI.json";
 import FAQ from "./components/FAQ/FAQ";
 import OurTeam from "./components/OurTeam/OurTeam";
+import Loader from "./components/Loader/Loader";
 let web3 = new Web3(window.ethereum);
 
 
@@ -36,6 +38,15 @@ function App() {
   const [alert, setAlert] = useState({show : false, msg: ""});
   const [activePayment, setActivePayment] = useState(false);
   const [isBorrowerAddress, setBorrowerAddress] = useState();
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(()=> {
+    setLoading(true);
+    setTimeout(()=> {
+      setLoading(false);
+    }, 2000)
+  }, []);
 
   
   useEffect(() => {
@@ -91,31 +102,10 @@ function App() {
   }
 
 
-  // // /* Function to create a plan from the owner wallet | could be solve with inputs form */
-  // function createPlan() {
-  //   const upfrontPayment = web3.utils.toWei("20", "ether");
-  //   const monthlyPayment = web3.utils.toWei("20", "ether");
-  //   const lenderAddress = "0x68ec584C5f130319E71992bC9A8369111a07c5FA";
-  //   const tokenPaymentAddress = "0x5B4c93B48A18F5DfA3e86Dcb3843477A82955cb5";
-  //   console.log(upfrontPayment,monthlyPayment);
-  //   blockchain.smartContract.methods
-  //   .createPlan(lenderAddress, tokenPaymentAddress,upfrontPayment, monthlyPayment)
-  //   .send({from : blockchain.account})
-  //   .once("error", (err)=> {
-  //     console.log(err);
-  //     console.log("Transaction was rejected!");
-  //   })
-  //   .then((receipt)=> {
-  //     console.log(receipt);
-  //     dispatch(fetchData(blockchain.account));
-  //   });
-
-  // }
-
 
   // Function to request a loan for a specific loan plan
   async function getLoan() {
-    showAlert(true, "Welcome to MetaLoan, Your payment is processing...!");
+    showAlert(true, "Welcome to MetaLoan, your payment is processing...!");
     setActivePayment(true);
 
     /* Get Plan Information */
@@ -161,7 +151,7 @@ function App() {
       .then((receipt)=> {
         console.log(receipt);
         setActivePayment(false);
-        showAlert(true, "Congratulations, You loan has been submitted successfully!");
+        showAlert(true, "Congratulations, your loan has been submitted successfully!");
         dispatch(fetchData(blockchain.account));
       })
     })
@@ -172,7 +162,7 @@ function App() {
   /* Function to make a monthly payment */
   async function payLoan() {
     setActivePayment(true);
-    showAlert(true, "Happy to see you, Your payment is processing...!");  
+    showAlert(true, "Happy to see you, your payment is processing...!");  
 
     /* Get Plan Information */
     let plan = await blockchain.smartContract.methods.idToPlan(loanId).call();
@@ -209,7 +199,7 @@ function App() {
         .then((receipt)=> {
           console.log(receipt);
           setActivePayment(false);
-          showAlert(true, "Congratulations, You monthly payment has been submitted successfully");
+          showAlert(true, "Congratulations, your monthly payment has been submitted successfully!");
           dispatch(fetchData(blockchain.account));
         })
     })
@@ -218,7 +208,7 @@ function App() {
 
   
   
-  /* Fetch loan per user */
+  /* Function that fetch a single user loan*/
   async function fetchLoanData() {
     /* User Account */
     const userAccount = await blockchain.account;
@@ -280,6 +270,8 @@ function App() {
 
   return (
   <s.Main>
+
+    { loading ? <Loader/> :
       <>  
           <Navbar/>
           <Routes>
@@ -291,6 +283,10 @@ function App() {
                        alert={alert}/>}/>
               
               {/* <Route path="/faq" element={<FAQ/>}/> */}
+              <Route path="/admin" element ={<Admin showAlert={showAlert}
+                                                    alert={alert}
+                                                    activePayment={activePayment}
+                                                    setActivePayment={setActivePayment}/>}/>
               <Route exact path="/launchApp"
                   element={<LaunchApp fetchLoanData={fetchLoanData} 
                                       fetchBorrowersData={fetchBorrowersData}/>}>
@@ -330,6 +326,7 @@ function App() {
                        alert={alert}/> */}
           <Footer/>
       </>
+    }
   </s.Main>
   
 );

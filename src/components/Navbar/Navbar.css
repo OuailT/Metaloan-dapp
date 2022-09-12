@@ -27,8 +27,11 @@ header .logo span {
 }
 
 .navigation li {
-    margin-left: 20px;
-    
+    margin-left: 10px;
+}
+
+#lastchild {
+    padding-right: 10px;
 }
 
 .navigation li a {
