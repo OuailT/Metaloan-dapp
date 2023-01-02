@@ -36,6 +36,7 @@ const blockchainReducer = (state = initialState, action) => {
       return {
         ...state,
         account: action.payload.account,
+        walletConnected: false
       };
     default:
       return state;
