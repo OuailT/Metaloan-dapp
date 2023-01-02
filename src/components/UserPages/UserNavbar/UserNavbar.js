@@ -1,7 +1,13 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 import "./UserNavbar.css";
+import { useEffect } from "react";
 
 const UserNavbar = ({fetchLoanData, fetchBorrowersData}) => {
+
+    useEffect(()=> {
+      fetchBorrowersData();
+      fetchLoanData();
+    },[])
 
     return (
         <>
@@ -9,7 +15,7 @@ const UserNavbar = ({fetchLoanData, fetchBorrowersData}) => {
              <ul className="links-Navigation">
 
                  <li>
-                    <Link to="fetchBorrowers"
+                    <Link to="borrowers"
                           onClick={()=> fetchBorrowersData()}
                           >Borrowers</Link>
                  </li>

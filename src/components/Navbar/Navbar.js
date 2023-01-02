@@ -10,21 +10,14 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const blockchain = useSelector((state) => state.blockchain);
     const [click, setClick] = useState(false);
-    const [accounts, setAccounts] = useState([]);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-    console.log(blockchain.account, accounts);
+    // console.log(blockchain.account, blockchain.walletConnected);
 
     // useEffect(()=> {
-    //     
     //     dispatch(fetchData(blockchain.account));
-    // }, [])
+    // }, [blockchain.account])
 
-
-    useEffect(()=> {
-        getData();
-        fetchAccounts();
-    }, [blockchain.account]);
 
 
     const getData = () => {
@@ -32,31 +25,7 @@ const Navbar = () => {
             dispatch(fetchData(blockchain.account));
         }
     };
-
-    // fetch accounts Data
-    async function fetchAccounts() {
-        const { ethereum } = window;
-        const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
-
-        if(metamaskIsInstalled) {
-            try {
-                const accounts = await window.ethereum.request({
-                    method: "eth_requestAccounts",
-                  });
-                  setAccounts(accounts[0]);               
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
-    // {accounts.length === 0 ? "Connect Wallet" : (
-    //     <div id='address'>
-    //         {accounts.substring(0, 12)}...
-    //     </div>)}
-
     
-
     return (
        <header> 
            <Link to="/" className="logo" onClick={closeMobileMenu}> <span>MetaLoan</span></Link>
@@ -68,7 +37,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                    <Link to="/howitWorks" onClick={closeMobileMenu}>How it Works</Link>
+                    <Link to="/howitWorks" onClick={closeMobileMenu}>How It Works</Link>
                 </li>
 
                 <li>
@@ -106,9 +75,9 @@ const Navbar = () => {
                                 getData();
                     }}>
                     
-                    {accounts.length === 0 ? "Connect Wallet" : (
+                    {blockchain.walletConnected === false ? "connect wallet" : (
                         <div id='address'>
-                            {accounts.substring(0,12)}...
+                            {blockchain.account.substring(0,12)}...
                         </div>
                     )}
                             

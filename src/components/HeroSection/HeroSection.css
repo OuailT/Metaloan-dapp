@@ -7,6 +7,21 @@
     padding: 71px 0px;
 }
 
+.LineChildren {
+    transform: translate(0, 500px);
+    padding-top:2px; 
+}
+
+/* .text-Header.bottom {
+    padding-bottom: 20px;
+} */
+
+
+.LineParents {
+   overflow: hidden;
+   
+} 
+
 .content .textBox {
     position: relative;
     max-width: 500px;

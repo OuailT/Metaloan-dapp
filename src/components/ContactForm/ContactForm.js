@@ -10,7 +10,7 @@ const ContactForm = ({alert, removeAlert}) => {
   const [isCheckBox, setIsCheckBox] = useState(false);
   const handleClick = () => setDisabled(!disabled);
 
-
+  console.log(alert);
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -26,6 +26,7 @@ const ContactForm = ({alert, removeAlert}) => {
   } 
 
     return (
+      <>
         <section className="contacts" id="requestloan">
         <div className="title">
           <h1>Request a Loan</h1>
@@ -59,15 +60,16 @@ const ContactForm = ({alert, removeAlert}) => {
                   onChange={()=> setIsCheckBox(!isCheckBox)}/>  
             <label for="user_checkbox">MetaLoan requires a down payment of up to 50% before any purchase. By submitting a request you acknowledge this requirement.</label>
           </div>
-
+          
           <div className="inputBox">
             <input type="Submit"/>
           </div>
           <>
-            {alert.show && <Alert {...alert} removeAlert={removeAlert} />}
+            {alert && <Alert {...alert} removeAlert={removeAlert} />}
           </>
         </form>
       </section>
+      </>
     )
 }
 

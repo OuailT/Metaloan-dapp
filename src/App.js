@@ -23,7 +23,9 @@ import ERC20ABI from "./ERC20ABI.json";
 import FAQ from "./components/FAQ/FAQ";
 import OurTeam from "./components/OurTeam/OurTeam";
 import Loader from "./components/Loader/Loader";
+import Home from "./components/Home";
 let web3 = new Web3(window.ethereum);
+
 
 
   // Metaloan real smart contract : 0x6Eb3a9B8776BE1DdbAc473D2af5b403BA69320cb
@@ -45,7 +47,7 @@ function App() {
     setLoading(true);
     setTimeout(()=> {
       setLoading(false);
-    }, 2000)
+    }, 3000)
   }, []);
 
   
@@ -221,19 +223,22 @@ function App() {
     const totalPaymentPerWallet =  (paymentData / 1000000);
 
     /* Loan information */
-    const status = (data.activated).toString();
+    
+    // const status = (data.activated).toString();
     let startDay = (moment.unix(data.start)).toString();
     let nextPayment = (moment.unix(data.nextPayment)).toString();
     let borrowerAddress = (data.borrower).toString();
 
     setBorrowerAddress(borrowerAddress.toLowerCase());
 
+    // {status == true ? "Active" : ""}
+
       let item = {
         borrower : borrowerAddress,
         startLoan: startDay,
         nextPayment: nextPayment,
         totalPayment: totalPaymentPerWallet,
-        activated: status
+        activated: "Active"
       }
 
       setLoanData(item);
@@ -249,16 +254,16 @@ function App() {
     /* Fetch all borrowers */
     let items = await Promise.all(data.map(async (el) => {
       /* All borrowers information */
-      const status = (el.activated).toString();
+      // const status = (el.activated).toString();
       let startDay = (moment.unix(el.start)).toString();
       let nextPayment = (moment.unix(el.nextPayment)).toString();
       let borrowerAddress = (el.borrower).toString();
-
+      
       let item = {
         borrower : borrowerAddress,
         start: startDay,
         nextPayment: nextPayment,
-        activated: status
+        activated: "Active"
       }
 
       return item;
@@ -270,16 +275,16 @@ function App() {
 
   return (
   <s.Main>
-
+    
     { loading ? <Loader/> :
       <>  
           <Navbar/>
           <Routes>
-              <Route exact path="/" element={<HeroSection/>}/>
-              <Route exact path="/howitWorks" element={<HowItoWorks/>}/>
-              <Route exact path="/about" element={<About/>}/>
-              <Route exact path="/metateam" element={<OurTeam/>}/>
-              <Route exact path="/requestloan" element={<ContactForm removeAlert={showAlert}
+              <Route path="/" element={<Home/>}/>
+              <Route path="/howitWorks" element={<HowItoWorks/>}/>
+              <Route path="/about" element={<About/>}/>
+              <Route path="/metateam" element={<OurTeam/>}/>
+              <Route path="/requestloan" element={<ContactForm removeAlert={showAlert}
                        alert={alert}/>}/>
               
               {/* <Route path="/faq" element={<FAQ/>}/> */}
@@ -287,11 +292,11 @@ function App() {
                                                     alert={alert}
                                                     activePayment={activePayment}
                                                     setActivePayment={setActivePayment}/>}/>
-              <Route exact path="/launchApp"
+              <Route path="/launchApp"
                   element={<LaunchApp fetchLoanData={fetchLoanData} 
                                       fetchBorrowersData={fetchBorrowersData}/>}>
               
-              <Route exact path="submitLoan"
+              <Route path="submitLoan"
                   element={<SubmitLoan getLoan={getLoan}
                                        incrementLoanId={incrementLoanId}
                                        decrementLoanId={decrementLoanId}
@@ -301,7 +306,7 @@ function App() {
                                        activePayment={activePayment}
                                        />}/>
 
-                <Route exact path="payLoan"
+                <Route path="payLoan"
                   element={<PayLoan payLoan={payLoan}
                                        alert = {alert}
                                        removeAlert = {showAlert}
@@ -310,11 +315,11 @@ function App() {
                                        loanId={loanId}
                                        activePayment={activePayment}/>}/>
 
-                  <Route exact path="fetchLoan" 
+                  <Route path="fetchLoan" 
                   element={<FetchLoan LoanData={LoanData}
                                       isBorrowerAddress={isBorrowerAddress}/>}/>
 
-                  <Route exact path="fetchBorrowers" 
+                  <Route path="borrowers" 
                   element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
 
                   {/* <Route path="createPlan"
@@ -322,7 +327,7 @@ function App() {
                   
               </Route>
           </Routes>
-          {/* <ContactForm exact removeAlert={showAlert}
+          {/* <ContactForm removeAlert={showAlert}
                        alert={alert}/> */}
           <Footer/>
       </>
@@ -333,4 +338,69 @@ function App() {
     
 }
 
-export default App;    
+export default App;
+
+
+
+// return (
+//   <s.Main>
+
+//     { loading ? <Loader/> :
+//       <>  
+//           <Navbar/>
+//           <Routes>
+//               <Route exact path="/" element={<HeroSection/>}/>
+//               <Route exact path="/howitWorks" element={<HowItoWorks/>}/>
+//               <Route exact path="/about" element={<About/>}/>
+//               <Route exact path="/metateam" element={<OurTeam/>}/>
+//               <Route exact path="/requestloan" element={<ContactForm removeAlert={showAlert}
+//                        alert={alert}/>}/>
+              
+//               {/* <Route path="/faq" element={<FAQ/>}/> */}
+//               <Route path="/admin" element ={<Admin showAlert={showAlert}
+//                                                     alert={alert}
+//                                                     activePayment={activePayment}
+//                                                     setActivePayment={setActivePayment}/>}/>
+//               <Route exact path="/launchApp"
+//                   element={<LaunchApp fetchLoanData={fetchLoanData} 
+//                                       fetchBorrowersData={fetchBorrowersData}/>}>
+              
+//               <Route exact path="submitLoan"
+//                   element={<SubmitLoan getLoan={getLoan}
+//                                        incrementLoanId={incrementLoanId}
+//                                        decrementLoanId={decrementLoanId}
+//                                        loanId={loanId}
+//                                        alert = {alert}
+//                                        removeAlert = {showAlert}
+//                                        activePayment={activePayment}
+//                                        />}/>
+
+//                 <Route exact path="payLoan"
+//                   element={<PayLoan payLoan={payLoan}
+//                                        alert = {alert}
+//                                        removeAlert = {showAlert}
+//                                        incrementLoanId={incrementLoanId}
+//                                        decrementLoanId={decrementLoanId}
+//                                        loanId={loanId}
+//                                        activePayment={activePayment}/>}/>
+
+//                   <Route exact path="fetchLoan" 
+//                   element={<FetchLoan LoanData={LoanData}
+//                                       isBorrowerAddress={isBorrowerAddress}/>}/>
+
+//                   <Route exact path="borrowers" 
+//                   element={<FetchBorrowers BorrowersData = {BorrowersData}/>}/>
+
+//                   {/* <Route path="createPlan"
+//                   element={<CreatePlan createPlan={createPlan}/>}/> */}
+                  
+//               </Route>
+//           </Routes>
+//           {/* <ContactForm exact removeAlert={showAlert}
+//                        alert={alert}/> */}
+//           <Footer/>
+//       </>
+//     }
+//   </s.Main>
+  
+// );

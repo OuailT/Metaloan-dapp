@@ -61,14 +61,19 @@ export const connect = () => {
 
 
     if (metamaskIsInstalled) {
+      console.log("MetaMask Here!")
+      // Helper package to create an object with the smart contract
       Web3EthContract.setProvider(ethereum);
+
       let web3 = new Web3(ethereum);
 
       try {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        
+
+        console.log("Accounts from Redux",accounts[0]);
+
         // Get the network version aka network Id of the network that we are connected wit it in metamask
         const networkId = await window.ethereum.request({
           method: "net_version",
@@ -85,6 +90,7 @@ export const connect = () => {
               account: accounts[0],
               smartContract: SmartContractObj,
               web3: web3,
+              walletConnected: true
             })
           );
           
@@ -95,6 +101,7 @@ export const connect = () => {
           ethereum.on("accountsChanged", (accounts) => {
             dispatch(updateAccount(accounts[0]));
           });
+          
           ethereum.on("chainChanged", () => {
             window.location.reload();
           });

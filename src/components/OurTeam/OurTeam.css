@@ -84,6 +84,7 @@
 .OurTeam-section .imgBox img:hover
 {
    transform: scale(1.2);
+   cursor: pointer;
 }
 
 .OurTeam-section .imgBox .img2,

@@ -27,7 +27,7 @@ header .logo span {
 }
 
 .navigation li {
-    margin-left: 10px;
+    margin-left: 12px;
 }
 
 #lastchild {
@@ -39,7 +39,8 @@ header .logo span {
     font-weight: 600;
     color: #fff;
     font-size: 1.10rem;
-    transition: color 0.5s;    
+    transition: color 0.5s;
+    padding-left: 4px;  
 }
 
 
