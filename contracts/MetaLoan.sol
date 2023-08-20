@@ -111,6 +111,7 @@ contract MetaLoan is ReentrancyGuard {
     }
 
 
+    
     /**
     * @dev An external function allows the admin of the contract to create a new loan plan    
     *
